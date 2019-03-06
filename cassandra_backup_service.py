@@ -895,7 +895,7 @@ class Cassandra(object):
         if args.cqlsh_ssl:
             cmd.append('--ssl')
 
-        _, out, _ = run_command(cmd)
+        _, out, _ = run_command(cmd, execute_during_dry_run=True)
 
         rows = [json.loads(r.strip()) for r in out.split('\n')[3:-3]]
         cf_id_map = {}
