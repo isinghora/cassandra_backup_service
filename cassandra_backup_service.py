@@ -598,6 +598,7 @@ class AWSBackupRepo(BaseBackupRepo):
             _, out, _ = run_command(cmd)
         except Exception as exception:
             if ' exited with code 1.' in exception.message:
+                logging.warning('List snapshot files returning empty list due to code 1 for path: {0}'.format(path))
                 return []
         return [f.split(' ')[-1] for f in out.strip().split('\n')]
 
@@ -618,6 +619,7 @@ class AWSBackupRepo(BaseBackupRepo):
             _, out, _ = run_command(cmd)
         except Exception as exception:
             if ' exited with code 1.' in exception.message:
+                logging.warning('List backup files returning empty list due to code 1 for path: {0}'.format(path))
                 return []
 
         return [f.split(' ')[-1] for f in out.strip().split('\n')]
