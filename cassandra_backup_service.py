@@ -598,7 +598,7 @@ class AWSBackupRepo(BaseBackupRepo):
             _, out, _ = run_command(cmd)
         except Exception as exception:
             if ' exited with code 1.' in exception.message:
-                return None
+                return []
         return [f.split(' ')[-1] for f in out.strip().split('\n')]
 
     def list_backup_files(self, host_id, keyspace, columnfamily):
@@ -618,7 +618,7 @@ class AWSBackupRepo(BaseBackupRepo):
             _, out, _ = run_command(cmd)
         except Exception as exception:
             if ' exited with code 1.' in exception.message:
-                return None
+                return []
 
         return [f.split(' ')[-1] for f in out.strip().split('\n')]
 
